@@ -2,7 +2,7 @@
     <el-header> 
         <el-row :gutter="20">
     <el-col :span="8">
-      <div><img class="logo" src="@/components/img/logo.svg"></div>
+      <div><img class="logo" src="@/assets/logo.svg"></div>
      
     
     </el-col>

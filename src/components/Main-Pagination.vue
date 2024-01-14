@@ -17,6 +17,8 @@
 
 <script>
 export default{
+
+
     data() {return{
       loading:true,
         currentPage:1,
@@ -25,11 +27,9 @@ export default{
     pokemons: [],
     }
 },
-props:{ title: String}
 
-,
+
 components:[],
-
 methods:{
 getData(){
 
@@ -51,7 +51,6 @@ getData(){
     .catch((error) => {
         console.warn(error);
     })
-
 },
 
 

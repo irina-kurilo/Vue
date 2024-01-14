@@ -19,7 +19,7 @@ import MainLayout from '@/components/MainLayout.vue'
   components:{
     Footer, Header,  MainLayout}
   ,
-    data() {
+    data() { 
       return {
         activeIndex: '1',
         activeIndex2: '1',
