@@ -1,4 +1,18 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
+import 'element-plus/theme-chalk/dark/css-vars.css';
+import '@/styles/dark/css-vars.css';
+import '@/styles/style-main.css';
+import '@/styles/pokemon.css';
 
-createApp(App).mount('#app')
+import App from './App.vue';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+
+
+const app = createApp(App)
+
+app.use(ElementPlus)
+app.use(VueAxios, axios)
+app.mount("#app")

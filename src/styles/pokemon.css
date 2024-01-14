@@ -1,0 +1,14 @@
+.pokemon_description{
+    text-align: left;
+    font-size: 18px;
+    text-transform: capitalize;
+}
+.pokemon_card_row{
+    justify-content: space-evenly;
+    padding: 10px 0px 10px 0px 
+}
+.pokemon_card_col{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+

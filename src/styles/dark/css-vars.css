@@ -1,0 +1,22 @@
+html.dark {
+    /* custom dark bg color */
+    --el-color-primary: #ffffff;
+    
+  }
+
+  html.dark .el-card{
+    --el-card-bg-color:#000000;
+  }
+  .el-card__body {
+    padding: var(--el-card-padding);
+    text-align: center;
+}
+
+.el-card {
+  --el-card-border-color: none;
+  --el-card-border-radius: 20px;}
+
+  .el-pagination {
+    --el-pagination-hover-color: #118DA8;
+  }
+ 
