@@ -3,7 +3,7 @@
     <div>
     <el-row class="pokemon_card_row">
      
-    <el-col class= "pokemon_card_col" v-for="pokemon in pokemons" :key="pokemon.id" :span="5">
+    <el-col class= "pokemon_card_col" v-for="pokemon in pokemons" :key="pokemon" :span="5" >
       <el-card>
         <img
           :src="pokemon.sprites.front_default"

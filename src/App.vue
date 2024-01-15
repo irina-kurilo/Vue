@@ -1,9 +1,10 @@
 <template>
   <div id="app"></div>
    <div class="common-layout">
-    <el-container>
+    <el-container class="main-container">
       <Header :menuIteams="MainMenuIteams"></Header>
-      <MainLayout/>
+      <router-view/>
+   
   <Footer :menuIteams="MainMenuIteams"></Footer>
 
     </el-container>
@@ -13,11 +14,11 @@
 
 <script>
 import Footer from '@/components/Site-Footer.vue'
-import Header from '@/components/Site-Header.vue'
-import MainLayout from '@/components/MainLayout.vue'
+import Header from '@/components/Site-Header.vue' 
+
   export default {
   components:{
-    Footer, Header,  MainLayout}
+    Footer, Header}
   ,
     data() { 
       return {

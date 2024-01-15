@@ -1,5 +1,5 @@
 <template>
-<el-container>
+<el-container class="pokemon-container">
       <Header :menuIteams="MainMenuIteams"></Header>
       <Pokemon> </Pokemon>
 

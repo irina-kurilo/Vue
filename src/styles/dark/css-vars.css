@@ -19,4 +19,7 @@ html.dark {
   .el-pagination {
     --el-pagination-hover-color: #118DA8;
   }
+  .el-header{
+    padding: 0px;
+  }
  
