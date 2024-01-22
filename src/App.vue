@@ -4,7 +4,6 @@
     <el-container class="main-container">
       <Header :menuIteams="MainMenuIteams"></Header>
       <router-view/>
-   
   <Footer :menuIteams="MainMenuIteams"></Footer>
 
     </el-container>

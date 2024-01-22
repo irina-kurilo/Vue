@@ -1,6 +1,13 @@
 <template>
     <div>
-        <p>Abilities</p>
+        <AbilitiesPage/>
     </div>
 </template>
-<script></script>
+<script>
+import AbilitiesPage from '@/components/AbilitiesPage.vue';
+export default{
+    components: {
+        AbilitiesPage
+    }
+}
+</script>

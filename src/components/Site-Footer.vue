@@ -66,7 +66,7 @@
   
   export default {
     name:'Site-Footer',
-    props:['menuIteams'],
+    props:[],
 
 
 

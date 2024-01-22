@@ -1,25 +1,52 @@
 html.dark {
-    /* custom dark bg color */
-    --el-color-primary: #ffffff;
-    
-  }
+  /* custom dark bg color */
+  --el-color-primary: #ffffff;
 
-  html.dark .el-card{
-    --el-card-bg-color:#000000;
-  }
-  .el-card__body {
-    padding: var(--el-card-padding);
-    text-align: center;
+}
+
+html.dark .el-card {
+  --el-card-bg-color: #000000;
+}
+
+.el-card__body {
+  padding: var(--el-card-padding);
+  text-align: center;
+  text-transform: capitalize;
 }
 
 .el-card {
   --el-card-border-color: none;
-  --el-card-border-radius: 20px;}
+  --el-card-border-radius: 20px;
+}
 
-  .el-pagination {
-    --el-pagination-hover-color: #118DA8;
-  }
-  .el-header{
-    padding: 0px;
-  }
- 
+.el-pagination {
+  --el-pagination-hover-color: #118DA8;
+}
+
+.el-header {
+  padding: 0px;
+}
+
+.el-collapse {
+  --el-collapse-header-font-size: 18px;
+  --el-collapse-header-text-color: rgb(255, 255, 255);
+  --el-collapse-content-font-size: 18px;
+  --el-collapse-content-text-color: rgb(255, 255, 255);
+  --el-collapse-border-color: rgb(0, 0, 0);
+}
+
+.el-carousel__item h3 {
+  display: flex;
+  color: #475669;
+  opacity: 0.75;
+  line-height: 300px;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}

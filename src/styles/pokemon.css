@@ -1,21 +1,44 @@
-.pokemon_description{
+.pokemon_description {
     text-align: left;
     font-size: 18px;
     text-transform: capitalize;
 }
-.pokemon_card_row{
+
+.pokemon_card_row {
     display: flex;
     justify-content: space-between;
-    padding: 10px 0px 10px 0px 
-}
-.pokemon_card_col{
-    margin-top: 10px;
-    margin-bottom: 10px;
- 
-        max-width: 19%;
-    
+    padding: 10px 0px 10px 0px
 }
 
-.pokemon-container{
-padding: 10px 0px 10px 0px;
+.pokemon_card_col {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    max-width: 19%;
+
+}
+
+.pokemon-container {
+    padding: 10px 0px 10px 0px;
+}
+
+
+
+.card :hover {
+    background-color: #5a5a5a;
+    cursor: pointer
+}
+
+.modal-backdrop[data-v-3848655a] {
+
+    z-index: 2;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.modal-title {
+    text-align: center;
+    text-transform: capitalize;
 }
