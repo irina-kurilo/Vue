@@ -1,16 +1,14 @@
-
 import Vuex from 'vuex'
-
-
+import pokemonsModule from './modules/pokemon.js';
+const state={};
+const mutations={};
+const actions={};
 const store = new Vuex.Store({
-  state: {
-    count: 0
-  },
-  mutations: {
-    increment (state) {
-      state.count++
-    }
-  }
-})
+  state,
+  mutations,
+  actions,
+  modules: {
+    pokemonsMod:pokemonsModule,
+  }})
 
-export default store;
+  export default store

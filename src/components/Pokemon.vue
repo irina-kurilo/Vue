@@ -1,34 +1,26 @@
 <template>
   <h1>Pokemon</h1>
   <div>
+
+  
     <el-row class="pokemon_card_row">
       <el-col class="pokemon_card_col" v-for="pokemon in pokemons" :key="pokemon" :span="5">
 
-        <el-card class="card" @click="showModal(pokemon)">
+        <el-card class="card" @click="showPokemon(pokemon)">
           <img :src="pokemon.sprites.front_default" class="image" />
-          <h3 @click="showModal(pokemon)">{{ pokemon.name }}</h3>
+          <h3>{{ pokemon.name }}</h3>
         </el-card>
 
-        <div v-if="show" @click.self="closeModal">
-          <div class="modal-backdrop" @click.self="closeModal">
-            <div v-scroll-lock="show" class="modal">
-              <div class="modal-close" @click="closeModal">✖</div>
-              <h3 class="modal-title"> {{ poke.name }}</h3>
+  <el-dialog v-model="centerDialogVisible" width="30%" center >
+    <div v-scroll-lock="show">
+    <h3 class="modal-title"> {{ poke.name }}</h3>
               <div class="modal-content">
-                <carousel class="story-carousel story-carousel--colors">
-                  <slide class="story-carousel__slide">
-                    <img :src="poke.sprites.front_default" class="image" />
-                  </slide>
-                  <slide class="story-carousel__slide">
-                    <img :src="poke.sprites.back_default" class="image" />
-                  </slide>
-                  <slide class="story-carousel__slide">
-                    <img :src="poke.sprites.front_shiny" class="image" />
-                  </slide>
-                  <slide class="story-carousel__slide">
-                    <img :src="poke.sprites.back_shiny" class="image" />
-                  </slide>
-                </carousel>
+                
+                <el-carousel height="200px" :loop = "true" :autoplay="false">
+      <el-carousel-item  v-for="item in getSprites(pokemon)" :key="item" class="image">
+        <img :src="item" class="slider-img" />
+      </el-carousel-item>
+    </el-carousel>
                 <div class="pokemon_description">
                   <p>Weight: {{ poke.weight }}</p>
                   <p>Height: {{ poke.height }}</p>
@@ -36,27 +28,26 @@
                   <span v-for="abi in poke.abilities" :key="abi">
                     {{ abi.ability.name }};
                   </span>
-                  <div class="demo-collapse">
-                    <el-collapse v-model="activeNames" @change="handleChange">
-                      <el-collapse-item title="Move:" name="1">
-                        <div>
+                  
+                    <el-collapse>
+                      <el-collapse-item title="Move:" >
+                     
                           <span v-for="move in poke.moves" :key="move">
                             {{ move.move.name }};
                           </span>
-                        </div>
+                    
                       </el-collapse-item>
                     </el-collapse>
-                  </div>
+                 
                 </div>
               </div>
-              <div class="modal-footer">
-                <button class="modal-footer__button" @click="closeModal">
+              <div class="dialog-footer">
+                <button type="primary" class="modal-footer__button" @click="centerDialogVisible = false">
                   Ок
                 </button>
               </div>
             </div>
-          </div>
-        </div>
+  </el-dialog>
       </el-col>
     </el-row>
     <el-pagination v-loading="loading" v-model:current-page="currentPage" v-model:page-size="pageSize"
@@ -66,57 +57,84 @@
 </template>
 <script>
 import 'es6-promise/auto';
-import { Carousel, Slide } from 'vue-snap'
 import 'vue-snap/dist/vue-snap.css'
+import { mapState, mapActions,mapMutations } from 'vuex';
+
 export default {
   data() {
     return {
-      show: false,
-      loading: true,
+      centerDialogVisible: false,
+   
+      loading: false,
       currentPage: 1,
       pageSize: 10,
       totalCount: 0,
-      pokemons: [],
-      poke: "",
+    //  pokemons: [],
+      poke: ""
     }
   },
+  
   name:`Pokemon`,
-  components: {
-    Carousel,
-    Slide
-  },
+  computed: {
+  ...mapState({
+    pokemons: (state) => state.pokemons
+  })
+},
   methods: {
-    closeModal() {
-      this.show = false
-    },
-    showModal(pokemon) {
-      this.show = true;
-      this.poke = pokemon;
-    },
-    sendDataFunction: function () {
-      // обработчик отправки данных
-    },
-    getData() {
-      this.axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${(this.currentPage - 1) * this.pageSize}&limit=${this.pageSize}`)
-        .then((response) => {
-          this.totalCount = response.data.count;
-          this.pokemons = [];
-          response.data.results.forEach(items => {
-            this.axios.get(items.url).then(async (resp) => {
-              this.pokemons.push(resp.data)
-              console.log(this.pokemons);
-            })
-          })
-          this.loading = false;
-        })
-        .catch((error) => {
-          console.warn(error);
-        })
-    },
+    ...mapActions({
+getData:("pokemonsMod", "getData")
+    }),
+    ...mapMutations({
+      setLoading:"SET_LOADING",
+      setPokemons:"SET_POKEMONS",
+        setCurrentPage:"SET_CURRENT_PAGE",
+            setPageSize:"SET_PAGE_SIZE",
+                setTotalCount:"SET_TOTAL_COUNT",
+    }),
+  getSprites(pokemon){
+   var spritesValues= this.getPropertyValues(pokemon.sprites)
+   return spritesValues
+  },
+  getPropertyValues (object){
+    let propertyNames=Object.getOwnPropertyNames(object);
+    let result=[];
+    propertyNames.forEach((item)=>{
+      if (object[item]!=null && typeof(object[item])==="string"){
+        result.push(object[item]);
+      }})
+    
+  return result
   },
 
-  mounted() {
-    this.getData()
+    showPokemon (pokemon){
+      this.centerDialogVisible=true;
+      this.poke = pokemon;
+    },
+    
+    // getData() {
+    //   this.axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${(this.currentPage - 1) * this.pageSize}&limit=${this.pageSize}`)
+    //     .then((response) => {
+    //       this.totalCount = response.data.count;
+    //       this.pokemons = [];
+    //       response.data.results.forEach(items => {
+    //         this.axios.get(items.url).then(async (resp) => {
+    //           this.pokemons.push(resp.data)
+    //           console.log(this.pokemons);
+    //         })
+    //       })
+    //       this.loading = false;
+    //     })
+    //     .catch((error) => {
+    //       console.warn(error);
+    //     })
+    // },
+  },
+
+  async mounted() {
+   await this.getData({pageSize: this.pageSize, currentPage: this.currentPage});
+   console.log(this.$store.state.totalCount);
+    
+    
   },
 }
 </script>
@@ -147,21 +165,7 @@ export default {
          left: 50%;
          transform: translate(-50%, -50%);
 
-         &-close {
-           border-radius: 50%;
-           color: #ffffff;
-           background: #ffffff00;
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           position: absolute;
-           top: 7px;
-           right: 7px;
-           width: 30px;
-           height: 30px;
-           cursor: pointer;
-         }
-
+     
          &-title {
            color: #0971c7;
          }
