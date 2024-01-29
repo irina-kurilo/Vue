@@ -11,13 +11,13 @@
           <h3>{{ pokemon.name }}</h3>
         </el-card>
 
-  <el-dialog v-model="centerDialogVisible" width="30%" center >
-    <div v-scroll-lock="show">
+  <el-dialog v-model="centerDialogVisible"  width="30%" center >
+    <div>
     <h3 class="modal-title"> {{ poke.name }}</h3>
               <div class="modal-content">
                 
                 <el-carousel height="200px" :loop = "true" :autoplay="false">
-      <el-carousel-item  v-for="item in getSprites(pokemon)" :key="item" class="image">
+      <el-carousel-item  v-for="item in getSprites(poke)" :key="item" class="image">
         <img :src="item" class="slider-img" />
       </el-carousel-item>
     </el-carousel>
@@ -32,9 +32,9 @@
                     <el-collapse>
                       <el-collapse-item title="Move:" >
                      
-                          <span v-for="move in poke.moves" :key="move">
-                            {{ move.move.name }};
-                          </span>
+                           <el-tag size="small" v-for="move in poke.moves" :key="move">
+                            {{ move.move.name }} 
+                          </el-tag>
                     
                       </el-collapse-item>
                     </el-collapse>
@@ -51,14 +51,14 @@
       </el-col>
     </el-row>
     <el-pagination v-loading="loading" v-model:current-page="currentPage" v-model:page-size="pageSize"
-      :page-sizes="[10, 20, 50, 100, 200]" layout="sizes, prev, pager, next" :total="totalCount" @size-change="getData"
-      @current-change="getData" />
+      :page-sizes="[10, 20, 50, 100, 200]" layout="sizes, prev, pager, next" :total="totalCount" @size-change="onPaginationChange"
+      @current-change="onPaginationChange" />
   </div>
 </template>
 <script>
 import 'es6-promise/auto';
 import 'vue-snap/dist/vue-snap.css'
-import { mapState, mapActions,mapMutations } from 'vuex';
+import { mapState, mapActions} from 'vuex';
 
 export default {
   data() {
@@ -68,28 +68,24 @@ export default {
       loading: false,
       currentPage: 1,
       pageSize: 10,
-      totalCount: 0,
-    //  pokemons: [],
-      poke: ""
+ 
+      poke: []
     }
   },
   
   name:`Pokemon`,
   computed: {
   ...mapState({
-    pokemons: (state) => state.pokemons
+    pokemons: (state) => state.pokemonsMod.pokemons,
+    totalCount: (state) => state.pokemonsMod.totalCount
   })
 },
   methods: {
+    onPaginationChange(){
+this.getData ({pageSize: this.pageSize, currentPage: this.currentPage})
+    },
     ...mapActions({
 getData:("pokemonsMod", "getData")
-    }),
-    ...mapMutations({
-      setLoading:"SET_LOADING",
-      setPokemons:"SET_POKEMONS",
-        setCurrentPage:"SET_CURRENT_PAGE",
-            setPageSize:"SET_PAGE_SIZE",
-                setTotalCount:"SET_TOTAL_COUNT",
     }),
   getSprites(pokemon){
    var spritesValues= this.getPropertyValues(pokemon.sprites)
@@ -107,8 +103,10 @@ getData:("pokemonsMod", "getData")
   },
 
     showPokemon (pokemon){
+      
       this.centerDialogVisible=true;
       this.poke = pokemon;
+      
     },
     
     // getData() {

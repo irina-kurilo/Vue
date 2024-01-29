@@ -21,6 +21,9 @@ export const pokemonsModule ={
                     state.totalCount=totalCount},
         SET_LOADING(state,loading){
             state.loading=loading},
+            CLEAR_POKEMONS(state){
+                state.pokemons=[]
+            }
     },
 
     actions: {
@@ -28,7 +31,7 @@ export const pokemonsModule ={
          await   Axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${(pagination.currentPage - 1) * pagination.pageSize}&limit=${pagination.pageSize}`)
                 .then( async (response) => {
                    commit("SET_TOTAL_COUNT", response.data.count);
-         
+         commit ("CLEAR_POKEMONS");
                     response.data.results.forEach(items => {
                         Axios.get(items.url).then((resp) => {
                             resp.data.url=items.url;

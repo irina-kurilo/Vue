@@ -1,14 +1,11 @@
 import Vuex from 'vuex'
 import pokemonsModule from './modules/pokemon.js';
-const state={};
-const mutations={};
-const actions={};
+import abilitiesModule from './modules/abilities.js';
 const store = new Vuex.Store({
-  state,
-  mutations,
-  actions,
+ 
   modules: {
     pokemonsMod:pokemonsModule,
+    abilitiesMod: abilitiesModule
   }})
 
   export default store
