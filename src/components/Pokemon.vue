@@ -24,7 +24,7 @@
                 <div class="pokemon_description">
                   <p>Weight: {{ poke.weight }}</p>
                   <p>Height: {{ poke.height }}</p>
-                  <p>Ability:</p>
+                  <p>Ability:</p> 
                   <span v-for="abi in poke.abilities" :key="abi">
                     {{ abi.ability.name }};
                   </span>
@@ -50,15 +50,11 @@
   </el-dialog>
       </el-col>
     </el-row>
-    <el-pagination v-loading="loading" v-model:current-page="currentPage" v-model:page-size="pageSize"
-      :page-sizes="[10, 20, 50, 100, 200]" layout="sizes, prev, pager, next" :total="totalCount" @size-change="onPaginationChange"
-      @current-change="onPaginationChange" />
   </div>
 </template>
 <script>
 import 'es6-promise/auto';
 import 'vue-snap/dist/vue-snap.css'
-import { mapState, mapActions} from 'vuex';
 
 export default {
   data() {
@@ -66,27 +62,16 @@ export default {
       centerDialogVisible: false,
    
       loading: false,
-      currentPage: 1,
-      pageSize: 10,
+  
  
       poke: []
     }
   },
   
   name:`Pokemon`,
-  computed: {
-  ...mapState({
-    pokemons: (state) => state.pokemonsMod.pokemons,
-    totalCount: (state) => state.pokemonsMod.totalCount
-  })
-},
+props:["pokemons"],
   methods: {
-    onPaginationChange(){
-this.getData ({pageSize: this.pageSize, currentPage: this.currentPage})
-    },
-    ...mapActions({
-getData:("pokemonsMod", "getData")
-    }),
+  
   getSprites(pokemon){
    var spritesValues= this.getPropertyValues(pokemon.sprites)
    return spritesValues
@@ -109,31 +94,9 @@ getData:("pokemonsMod", "getData")
       
     },
     
-    // getData() {
-    //   this.axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${(this.currentPage - 1) * this.pageSize}&limit=${this.pageSize}`)
-    //     .then((response) => {
-    //       this.totalCount = response.data.count;
-    //       this.pokemons = [];
-    //       response.data.results.forEach(items => {
-    //         this.axios.get(items.url).then(async (resp) => {
-    //           this.pokemons.push(resp.data)
-    //           console.log(this.pokemons);
-    //         })
-    //       })
-    //       this.loading = false;
-    //     })
-    //     .catch((error) => {
-    //       console.warn(error);
-    //     })
-    // },
   },
 
-  async mounted() {
-   await this.getData({pageSize: this.pageSize, currentPage: this.currentPage});
-   console.log(this.$store.state.totalCount);
-    
-    
-  },
+  
 }
 </script>
 

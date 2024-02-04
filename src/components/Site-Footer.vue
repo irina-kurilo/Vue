@@ -24,23 +24,34 @@
 <el-col :span="3">
   <el-row :gutter="20">
     <el-col :span="24">
-<div v-for="(item, index) in menuIteams" :key="index">
-<el-link class="link" :href="item.link" target="_blank">{{item.text}}</el-link></div>
+      <div class="nav">
+    <el-col class="grid-content ep-bg-purple" :span="16">
+
+
+    <el-row> <router-link class="link" to ="/">Home</router-link></el-row>
+    <el-row> <router-link class="link" to ="/Abilities">Abilities</router-link></el-row>
+    <el-row>  <router-link class="link" to ="/About">About</router-link></el-row>
+
+    
+         
+</el-col>
+</div>
 </el-col>
 </el-row>
 </el-col>
 <el-col :span="4">
-  <el-row :gutter="20">
-    <el-col :span="24">
+  
+    <el-col class="nav-footer" :span="24">
 
 
-  <div v-for="(item, index) in AddMenuIteams" :key="index">
+  <div  class="link-footer" v-for="(item, index) in AddMenuIteams" :key="index">
 
     
-<el-link class="link" :href="item.link" target="_blank">{{item.text}}</el-link></div>
+<a class="link-menu" :href="item.link" target="_blank">{{item.text}}</a>
+</div>
 
 </el-col>
-</el-row>
+
 </el-col>
 <el-col :span="6">
   <el-row :gutter="20">

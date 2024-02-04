@@ -30,4 +30,10 @@ justify-content: space-between;}
     padding-right: 58px;
     font-size: 17px;
 }
+.link-footer{padding-bottom: 18px;}
 
+.link-menu{ color: #fff;
+}
+.nav-footer{
+    display: flex;
+}

@@ -72,3 +72,16 @@ html.dark .el-card {
 .el-carousel__item.img{
   height: 250px;
 }
+.el-collapse-item__header{   font-family: 'dm sans';
+  font-weight: 300;
+color: #CFD3DC;}
+.el-collapse{
+  
+--el-collapse-border-color:#141414}
+.el-table__header{
+  font-size: 22px;
+}
+
+.el-tag{
+ background-color: #191919;
+}
