@@ -46,9 +46,12 @@ export const abilitiesModule ={
                                 name:resp.data.name,
                                 id:resp.data.id,
                                 is_main_series:resp.data.is_main_series,
-                                effect:resp.data.effect_entries[1].effect,
+                                effect: "No effect",
                                 pokemons: resp.data.pokemon,
                                 
+                            }
+                            if(resp.data.effect_entries[1]){
+                                data.effect=resp.data.effect_entries[1].effect
                             }
                         
                             commit ("ADD_ABILITIES", data)

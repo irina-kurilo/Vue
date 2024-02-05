@@ -45,3 +45,7 @@
 .slider-img{
     height: 140px;
 }
+
+.dialog-footer{
+    display: flex;
+}

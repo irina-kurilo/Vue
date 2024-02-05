@@ -7,29 +7,34 @@
     </div>
   </template>
   <script>
+  import { mapState, mapActions} from 'vuex';
+
   
   export default {
     data() {
       return {
-
   
         currentPage: 1,
         pageSize: 10,
    
       }
     },
-    
     name:`Pagination-Pokemon`,
-    props:
-      {getData:Function,
-    totalCount:Number,
-    loading:Boolean
-  },
+
+    computed: {
+  ...mapState({
+    totalCount: (state) => state.pokemonsMod.totalCount
+  })
+},
+
   methods: {
     onPaginationChange(){
 this.getData ({pageSize: this.pageSize, currentPage: this.currentPage})
-    }},
-    
-  }
+    },
+    ...mapActions({
+getData:("pokemonsMod", "getData")
+    })},
+    }
+  
   </script>
   

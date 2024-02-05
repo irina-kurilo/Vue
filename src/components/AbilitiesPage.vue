@@ -6,7 +6,7 @@
  @current-change="onPaginationChange" />
     
     <el-table 
-    :data="abilities"
+    :data="abilitiesFilter"
       style="width: 100%">
       <el-table-column 
         prop="id"
@@ -26,10 +26,6 @@
       <el-table-column
         prop="effect"
         label="Effect">
-        <div v-if="effect===undefined">
-     <p>No results found!</p>
-  </div>
-          
                 
       </el-table-column>
       <el-table-column
@@ -38,12 +34,19 @@
         label="Pokemons">
         
       <template #default="scope">
-                           <p v-for="(pokemon, index) in scope.row.pokemons.filter((pokemon) => pokemon.pokemon.name.includes(this.search))" :key="index">
+
+        <el-collapse>
+                      <el-collapse-item title="Pokemon:" >
+                     
+                           <el-tag size="small" v-for="(pokemon, index) in scope.row.pokemons" :key="index">
                             {{ pokemon.pokemon.name }} 
-                            <div class="item error" v-if="pokemon.lenght===null">
-     <p>No results found!</p>
-  </div>
-                           </p>         
+                          </el-tag>
+                    
+                      </el-collapse-item>
+                    </el-collapse>
+                 
+
+                             
                   </template>
 
                
@@ -55,7 +58,7 @@
         <el-input
           v-model="search"
           size="mini"
-          placeholder="Type to searc"/>
+          placeholder="Type to search"/>
       </template></el-table-column>
     </el-table>
   </div>
@@ -63,9 +66,7 @@
 
   <script>
 import { mapState, mapActions} from 'vuex';
-import { computed, effect, ref } from 'vue'
 
-const searc= ref('')
 export default {
       data() {
         return {
@@ -84,11 +85,11 @@ export default {
     abilities: (state) => state.abilitiesMod.abilities,
     totalCount: (state) => state.abilitiesMod.totalCount
   }),
-  // abilitiesFilter() {
+  abilitiesFilter() {
    
-  //   return this.abilities.filter(item => item.name.includes(this.search));
-  //   }
-   
+    return this.abilities.filter(item => item.name.includes(this.search) || item.id == this.search || item.pokemons.find(x=>x.pokemon.name ===this.search)!==undefined);
+    }
+
   
 },
   methods: {
