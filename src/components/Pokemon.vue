@@ -2,13 +2,29 @@
   <h1>Pokemon</h1>
   <div>
 
-    <button class="modal-footer__button edit" @click="add()">
-      <div v-if="add">
-                <p>Weight:<el-input v-model="weightEdit" ref="weight" size="mini" /> </p>
-                <p>Height:<el-input v-model="heightEdit" ref="height" size="mini" /> </p>
-                <p>Name<el-input v-model="nameEdit" ref="name" size="mini" /> </p>
+  <button class="modal-footer__button edit" @click="centerDialogVisible = true"> Add</button>
+  <el-dialog v-model="centerDialogVisible" width="30%" center>
+          <div>
+            <h3 class="modal-title"> Add Pokemon</h3>
+            <div class="modal-content">
+              <div class="pokemon_description">
+                <p>Weight:<el-input type="number" v-model="weightAdd"  size="mini" /> </p>
+                <p>Height:<el-input type="number" v-model="heightAdd"  size="mini" /> </p>
+                <p>Name<el-input type="text" v-model="nameAdd" size="mini" /> </p>
                 </div>
-  <span >Add</span> </button>
+              </div>
+            </div>
+            <div class="dialog-footer">
+  <button class="modal-footer__button" @click="Add(pokemon)">
+    Add
+  </button>
+  <button class="modal-footer__button" @click="Cancel()">
+  Cancel
+  </button>
+</div>
+        </el-dialog>
+     
+  
     <el-row class="pokemon_card_row">
      
       <el-col class="pokemon_card_col" v-for="pokemon in pokemons" :key="pokemon" :span="5">
@@ -20,8 +36,10 @@
 
         <el-dialog v-model="centerDialogVisible" width="30%" center>
           <div>
-            <h3 class="modal-title"> {{poke.name}}
-           /></h3>
+            <h3 class="modal-title"> <span v-if="!isEditing"> {{ poke.name }}</span>
+                <el-input  v-if="isEditing" type="text"  v-model="name" size="mini"
+          /> 
+           </h3>
             <div class="modal-content">
 
               <el-carousel height="200px" :loop="true" :autoplay="false">
@@ -30,21 +48,14 @@
                 </el-carousel-item>
               </el-carousel>
               <div class="pokemon_description">
-               
-                <p>Weight:<input type="text" ref="weight" size="mini"  :placeholder="poke.weight" :disabled="!isEditing"
+                <p> Weight: <span v-if="!isEditing">  {{ poke.weight}}</span>
+                <el-input v-if="isEditing" type="number" v-model="weight" size="mini"
            /> </p>
-                <p>Height:<input type="text"  ref="height" size="mini"  :placeholder="poke.height" :disabled="!isEditing"
+           <p>Height:<span v-if="!isEditing"> Height: {{ poke.height }}</span>
+                <el-input  v-if="isEditing" type="number"  v-model="height" size="mini"
           /> </p>
                 
-                <!-- <div v-if="!isEditing">
-               <p>Weight:<input type="text" ref="weight" size="mini"  :placeholder="poke.weight" :disabled="!isEditing"
-           /> </p>
-                <p>Height:<input type="text"  ref="height" size="mini"  :placeholder="poke.height" :disabled="!isEditing"
-          /> </p>
-                <div v-else>
-                <p>Weight: {{ poke.weight }}</p>
-                
-                <p>Height: {{ poke.height }}</p></div> -->
+        
                 <p>Ability:</p>
                 <span v-for="abi in poke.abilities" :key="abi">
                   {{ abi.ability.name }};
@@ -63,11 +74,7 @@
               </div>
             </div>
             <div class="dialog-footer">
-              <!-- <button type="primary" class="modal-footer__button" @click="!edit(pokemon)">
-                Save
-              </button>
-              <button class="modal-footer__button edit" @click="edit(pokemon)">
-  <span >Edit</span> </button> -->
+           
   <button class="modal-footer__button" @click="isEditing = !isEditing" v-if="!isEditing">
     Edit
   </button>
@@ -96,7 +103,12 @@ export default {
       currentPage: 1,
       pageSize: 10,
       isEditing: false,
-    }
+      weight:0,
+      height:0,
+      name:'',
+      weightAdd:0,
+    heightAdd:0,
+  nameAdd:'Name'    }
   },
   name: `Pokemon`,
   computed: {
@@ -110,8 +122,9 @@ export default {
     }),
 
     save ()
-    { this.poke.weight = this.$refs['weight'];
-      this.poke.height = this.$refs['height'];
+    { this.poke.weight = this.weight;
+      this.poke.height = this.height;
+      this.poke.name = this.name;
       this.isEditing = !this.isEditing;
    
     },
@@ -142,6 +155,10 @@ export default {
       this.poke = pokemon;
 
     },
+
+    Add(pokemon){
+
+    }
   },
 
   mounted() {
