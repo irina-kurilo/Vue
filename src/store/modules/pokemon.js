@@ -34,9 +34,12 @@ export const pokemonsModule ={
                     response.data.results.forEach(items => {
                         Axios.get(items.url).then((resp) => {
                             resp.data.url=items.url;
+            
+                            
+                        
                             commit ("ADD_POKEMONS", resp.data)
                         })
-                     //  console.log(state);
+                      console.log(state);
                     })
                    commit ("SET_LOADING",false);
                 })

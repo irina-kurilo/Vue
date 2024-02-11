@@ -2,35 +2,14 @@
   <h1>Pokemon</h1>
   <div>
 
-  <button class="modal-footer__button edit" @click="centerDialogVisible = true"> Add</button>
-  <el-dialog v-model="centerDialogVisible" width="30%" center>
-          <div>
-            <h3 class="modal-title"> Add Pokemon</h3>
-            <div class="modal-content">
-              <div class="pokemon_description">
-                <p>Weight:<el-input type="number" v-model="weightAdd"  size="mini" /> </p>
-                <p>Height:<el-input type="number" v-model="heightAdd"  size="mini" /> </p>
-                <p>Name<el-input type="text" v-model="nameAdd" size="mini" /> </p>
-                </div>
-              </div>
-            </div>
-            <div class="dialog-footer">
-  <button class="modal-footer__button" @click="Add(pokemon)">
-    Add
-  </button>
-  <button class="modal-footer__button" @click="Cancel()">
-  Cancel
-  </button>
-</div>
-        </el-dialog>
-     
+  <Add/>
   
     <el-row class="pokemon_card_row">
      
       <el-col class="pokemon_card_col" v-for="pokemon in pokemons" :key="pokemon" :span="5">
 
         <el-card class="card" @click="showPokemon(pokemon)">
-          <img :src="pokemon.sprites.front_default" class="image" />
+          <img :src="pokemon.sprites.front_default" class="image" width="96" height="96"/>
           <h3>{{ pokemon.name }}</h3>
         </el-card>
 
@@ -91,6 +70,7 @@
   </div>
 </template>
 <script>
+import Add from '@/components/PokemonAdd.vue'
 import 'es6-promise/auto';
 import 'vue-snap/dist/vue-snap.css'
 import { mapState, mapActions } from 'vuex';
@@ -111,6 +91,7 @@ export default {
   nameAdd:'Name'    }
   },
   name: `Pokemon`,
+  components:{Add},
   computed: {
     ...mapState({
       pokemons: (state) => state.pokemonsMod.pokemons,
@@ -133,9 +114,10 @@ export default {
     //           this.newTask = '';
     // },
     
-    getSprites(pokemon) {
-      var spritesValues = this.getPropertyValues(pokemon.sprites)
-      return spritesValues
+
+      getSprites(pokemon){
+   var spritesValues= this.getPropertyValues(pokemon.sprites)
+   return spritesValues
     },
     getPropertyValues(object) {
       let propertyNames = Object.getOwnPropertyNames(object);
@@ -155,6 +137,8 @@ export default {
       this.poke = pokemon;
 
     },
+
+
 
     Add(pokemon){
 
