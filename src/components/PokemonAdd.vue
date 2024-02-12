@@ -5,17 +5,25 @@
             <h3 class="modal-title"> Add Pokemon</h3>
             <div class="modal-content">
               <div class="pokemon_description">
-                <p>Weight:<el-input type="number" v-model="weightAdd"  /> </p>
-                <p>Height:<el-input type="number" v-model="heightAdd"  /> </p>
-                <p>Name<el-input type="text" v-model="nameAdd" /> </p>
-     
-
-    <p>Foto<el-input type="text" v-model="fotoAdd" /> </p>
+                <el-form  :rules="rules" ref="newPokemonForm">
+                  <el-form-item label="Name" prop="name">
+    <el-input type="text" v-model="newPokemon.name"></el-input>
+  </el-form-item>
+  <el-form-item label="Weight" prop="weight">
+    <el-input type="number" v-model="newPokemon.weight"></el-input>
+  </el-form-item>
+  <el-form-item label="Height" prop="height">
+    <el-input type="number" v-model="newPokemon.height"></el-input>
+  </el-form-item>
+  <el-form-item label="Foto" prop="newPokemon.sprites.front_default">
+    <el-input type="text" v-model="newPokemon.sprites.front_default"></el-input>
+  </el-form-item>
+  </el-form>
                 </div>
               </div>
             </div>
             <div class="dialog-footer">
-  <button class="modal-footer__button" @click="Add()">
+  <button class="modal-footer__button" @click="addPokemon()">
     Add
   </button>
   <button class="modal-footer__button" @click="centerDialogVisible=false">
@@ -28,44 +36,39 @@
         </el-dialog>
     </template>
     <script>
-    import { mapState, mapActions } from 'vuex';
+    import {validateName } from '@/mixins/validator.js';
+    import { mapState, mapActions} from 'vuex';
     export default {
       data() {
         return {
           centerDialogVisible: false,
          
-          weightAdd:0,
-        heightAdd:0,
-      nameAdd:'Pikachu',
-      fotoAdd:'https://i.pinimg.com/originals/0a/44/75/0a4475739cea776659a5148a1e480797.png',
-  
-    front_default:{}   }
-      },
+     newPokemonValidation:{
+    name:[{validator:validateName, trigger:'blur'}]
+      }}},
       name: `AddPokemon`,
       computed: {
         ...mapState({
           pokemons: (state) => state.pokemonsMod.pokemons,
+          newPokemon: (state) => state.pokemonsMod.newPokemon,
         }),
-        
-    
         
       },
       methods: {
         ...mapActions({
-          getData: ("pokemonsMod", "getData")
+          getData: ("pokemonsMod", "getData"),
+       addPokemon:("pokemonsMod","addPokemon")
         }),
-        
+      
+    
         Add(){
+          this.$refs["newPokemonForm"].validate((valid) => {
+          if (valid) {
+            this.addPokemon(this.newPokemon),
+            centerDialogVisible=false
+          }})
          
-          var sprite={front_default:this.fotoAdd}
-         
-      this.pokemons.unshift({
-           weight: this.weightAdd,
-      height: this.heightAdd,
-      name: this.nameAdd,
-      sprites:sprite,
-
-    })
+        
             
       },
     Clean(){
@@ -75,6 +78,8 @@
       this.fotoAdd='',
   
       this.front_default={}
+
+
     }
     
       

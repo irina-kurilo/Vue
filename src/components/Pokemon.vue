@@ -74,6 +74,7 @@ import Add from '@/components/PokemonAdd.vue'
 import 'es6-promise/auto';
 import 'vue-snap/dist/vue-snap.css'
 import { mapState, mapActions } from 'vuex';
+
 export default {
   data() {
     return {
@@ -86,10 +87,12 @@ export default {
       weight:0,
       height:0,
       name:'',
-      weightAdd:0,
-    heightAdd:0,
-  nameAdd:'Name'    }
+   
+  
+  }
   },
+
+
   name: `Pokemon`,
   components:{Add},
   computed: {

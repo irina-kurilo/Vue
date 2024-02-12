@@ -2,10 +2,17 @@ import Axios from 'axios';
 export const pokemonsModule ={
     state() {
         return{
-        pokemons: [],
-   
-      
-        totalCount: 0,}
+        pokemons: [],    
+        totalCount: 0,
+       
+        newPokemon:{
+            weight:0,
+          height:0,
+        name:'Pikachu',
+       sprites:{ 
+        front_default:'https://i.pinimg.com/originals/0a/44/75/0a4475739cea776659a5148a1e480797.png'}},
+
+       }
     },
     mutations: {
         SET_POKEMONS(state,pokemons){
@@ -22,7 +29,10 @@ export const pokemonsModule ={
             state.loading=loading},
             CLEAR_POKEMONS(state){
                 state.pokemons=[]
-            }
+            },
+            ADD_NEW_POKEMON( state, newPokemon) 
+            {state.pokemons.unshift(newPokemon)}
+           
     },
 
     actions: {
@@ -46,7 +56,16 @@ export const pokemonsModule ={
                 .catch((error) => {
                     console.warn(error);
                 })
-        }
+        },
+        addPokemon({state, commit}){
+          
+          commit ("ADD_NEW_POKEMON")
+           
+           
+           
+                  
+            },
+       
     }
 
 }
