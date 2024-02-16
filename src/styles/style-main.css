@@ -1,39 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap');
-body{
-    font-family: 'dm sans';
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap");
+body {
+  font-family: "dm sans";
 }
-.main-container{
-    padding: 10px 150px 10px 150px;
-}
-
-
-h1{
-    font-size: 64px;
-}
-body{
-    background-color: #191919;
-}
-.icon{
-    padding: 8px;
-}
-.nav{
-    display: flex;
-    align-items: center;
-    justify-content: center
+.main-container {
+  padding: 10px 150px 10px 150px;
 }
 
-.header-row{display: flex;
-justify-content: space-between;}
-
-.menu-item{
-    color: #fff;
-    padding-right: 58px;
-    font-size: 17px;
+h1 {
+  font-size: 64px;
+  color: #118da8;
 }
-.link-footer{padding-bottom: 18px;}
-
-.link-menu{ color: #fff;
+body {
+  background-color: #191919;
 }
-.nav-footer{
-    display: flex;
+.icon {
+  padding: 8px;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-item {
+  color: #fff;
+  padding-right: 58px;
+  font-size: 17px;
+}
+.link-footer {
+  padding-bottom: 18px;
+}
+
+.link-menu {
+  color: #fff;
+}
+.nav-footer {
+  display: flex;
 }

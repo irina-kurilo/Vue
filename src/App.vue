@@ -12,8 +12,8 @@
 
 
 <script>
-import Footer from '@/components/Site-Footer.vue'
-import Header from '@/components/Site-Header.vue' 
+import Footer from '@/components/Layout/Site-Footer.vue'
+import Header from '@/components/Layout/Site-Header.vue' 
 
   export default {
   components:{

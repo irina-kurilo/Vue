@@ -1,26 +1,26 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/Main-Home.vue'
-import Abilities from '@/views/Main-Abilities.vue'
-import About from '@/views/Main-About.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "@/views/Main-Home.vue";
+import Abilities from "@/views/Main-Abilities.vue";
+import About from "@/views/Main-About.vue";
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes:[
+  routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path: "/",
+      name: "home",
+      component: Home,
     },
     {
-      path: '/Abilities',
-      name: 'abilities',
+      path: "/Abilities",
+      name: "abilities",
       component: Abilities,
     },
     {
-      path: '/About',
-      name: 'About',
-      component: About}
-  ]
-  
-})
-export default router
+      path: "/About",
+      name: "About",
+      component: About,
+    },
+  ],
+});
+export default router;

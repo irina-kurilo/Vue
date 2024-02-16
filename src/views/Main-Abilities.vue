@@ -1,13 +1,13 @@
 <template>
-    <div>
-        <AbilitiesPage/>
-    </div>
+  <div>
+    <AbilitiesPage />
+  </div>
 </template>
 <script>
-import AbilitiesPage from '@/components/AbilitiesPage.vue';
-export default{
-    components: {
-        AbilitiesPage
-    }
-}
+import AbilitiesPage from "@/components/Abilities/AbilitiesPage.vue";
+export default {
+  components: {
+    AbilitiesPage,
+  },
+};
 </script>
