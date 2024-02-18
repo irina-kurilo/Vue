@@ -37,7 +37,8 @@
         getDataMag: ("magicMod", "getDataMag"),
       }),
       getAnswer(){
-        this.ans=""
+        this.getDataMag()
+     
         this.quest= this.question;
         console.log(this.question);
         this.ans=this.answer.answer;

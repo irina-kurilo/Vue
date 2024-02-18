@@ -8,9 +8,7 @@ export const magicModule = {
   mutations: {
     SET_ANSWER(state,answer) {
       state.answer = answer;},
-      CLEAR_ANSWER(state) {
-        state.answer = {};
-      },
+  
   },
 
   actions: {
@@ -18,7 +16,7 @@ export const magicModule = {
       Axios
     .get(`https://yesno.wtf/api`)
     .then((response) => {
-      commit("CLEAR_ANSWER", response.data);
+
       commit("SET_ANSWER", response.data);
      
       console.log(response.data)
