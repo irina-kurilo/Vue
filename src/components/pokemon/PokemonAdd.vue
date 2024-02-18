@@ -81,7 +81,7 @@ export default {
       this.$refs["newPokemonForm"].validate((valid) => {
         if (valid) {
           let pokemon = {};
-          Object.assign(pokemon, this, this.newPokemon);
+          Object.assign(pokemon, this.newPokemon);
           pokemon.name = capitalize(pokemon.name);
           this.addPokemon(pokemon);
           this.centerDialogVisible = false;

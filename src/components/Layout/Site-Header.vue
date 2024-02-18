@@ -11,6 +11,7 @@
           <router-link class="menu-item" to="/">Home</router-link>
           <router-link class="menu-item" to="/Abilities">Abilities</router-link>
           <router-link class="menu-item" to="/About">About</router-link>
+          <router-link class="menu-item" to="/Magic">Magic</router-link>
         </el-col>
       </div>
     </el-row>

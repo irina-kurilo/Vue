@@ -1,0 +1,34 @@
+import Axios from "axios";
+export const magicModule = {
+  state() {
+    return {
+      answer:{}
+    };
+  },
+  mutations: {
+    SET_ANSWER(state,answer) {
+      state.answer = answer;},
+      CLEAR_ANSWER(state) {
+        state.answer = {};
+      },
+  },
+
+  actions: {
+    getDataMag({commit}) {
+      Axios
+    .get(`https://yesno.wtf/api`)
+    .then((response) => {
+      commit("CLEAR_ANSWER", response.data);
+      commit("SET_ANSWER", response.data);
+     
+      console.log(response.data)
+    })
+      .catch((error) => {
+        console.warn(error);
+      });
+
+    }
+  }
+};
+
+export default magicModule;

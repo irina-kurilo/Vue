@@ -2,9 +2,9 @@
   <div id="app"></div>
    <div class="common-layout">
     <el-container class="main-container">
-      <Header :menuIteams="MainMenuIteams"></Header>
+      <Header/>
       <router-view/>
-  <Footer :menuIteams="MainMenuIteams"></Footer>
+  <Footer/>
 
     </el-container>
   </div>
@@ -23,28 +23,8 @@ import Header from '@/components/Layout/Site-Header.vue'
       return {
         activeIndex: '1',
         activeIndex2: '1',
-    MainMenuIteams:[{
-      index:'1',
-      text:'Home',
-      link:'https://element-plus.org'
-    },
-    {
-      index:'2',
-      text:'About',
-      link:'https://element-plus.org'
-    },
-    {
-      index:'3',
-      text:'Episodes',
-      link:'https://element-plus.org'
-    },
-    {
-      index:'4',
-      text:'Contact',
-      link:'https://element-plus.org'
-    }
-
-    ]};},
+  
+    };},
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);

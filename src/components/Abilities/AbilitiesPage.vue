@@ -24,7 +24,7 @@
       />
     </div>
     <div>
-      <el-input v-model="search" size="mini" placeholder="Type to search" />
+      <el-input v-model="search" placeholder="Type to search" />
     </div>
   </div>
   <el-table :data="abilitiesFilter" style="width: 100%">
